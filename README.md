@@ -30,6 +30,23 @@ To run it only for some packages:
 mix changelog jason phoenix
 ```
 
+## Example
+
+```
+mix changelog tailwind
+
+Package: tailwind
+Current version: 0.1.4
+Latest version:  0.1.5
+Hexdiff: https://diff.hex.pm/diff/tailwind/0.1.4..0.1.5
+
+# CHANGELOG
+
+## v0.1.5 (2022-01-18)
+  * Prune app.js css import to remove required manual step on first install
+
+```
+
 ## License
 
 Copyright (c) 2022 Dimitris Zorbas, MIT License.
