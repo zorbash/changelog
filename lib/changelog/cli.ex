@@ -1,6 +1,8 @@
 defmodule Changelog.CLI do
   @moduledoc "Shared entrypoint for the task and escript"
 
+  alias Changelog.Formatter
+
   def main(argv \\ []) do
     run(argv)
   end
@@ -43,17 +45,11 @@ defmodule Changelog.CLI do
         Latest version:  #{latest_version}
         Hexdiff: https://diff.hex.pm/diff/#{package_name}/#{version}..#{latest_version}
 
-        #{changelog_output(version, latest_version, changelog)}
+        #{Formatter.format(changelog, version)}
         --------------------------
         """)
       end
     end
-  end
-
-  defp changelog_output(version, version, _changelog), do: "Package is up to date"
-
-  defp changelog_output(current_version, _latest_version, changelog) do
-    String.replace(changelog, ~r/##? +v?#{current_version}.*/s, "")
   end
 
   defp fetch_changelogs(packages) do
