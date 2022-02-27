@@ -4,7 +4,7 @@ defmodule Changelog.MixProject do
   def project do
     [
       app: :changelog,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.12",
       escript: [main_module: Changelog.CLI],
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Changelog.MixProject do
       deps: deps(),
       package: package(),
       docs: [
-        extras: ["README.md"],
+        extras: ["CHANGELOG.md", "README.md"],
         main: "readme",
         source_url: "https://github.com/zorbash/changelog"
       ]
@@ -41,7 +41,7 @@ defmodule Changelog.MixProject do
 
   defp package do
     [
-      files: ["lib", "mix.exs", "README.md", ".formatter.exs"],
+      files: ["lib", "mix.exs", "README.md", "LICENSE.txt", ".formatter.exs"],
       maintainers: ["Dimitris Zorbas"],
       licenses: ["MIT"],
       links: %{
