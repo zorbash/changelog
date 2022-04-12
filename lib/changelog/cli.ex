@@ -36,7 +36,7 @@ defmodule Changelog.CLI do
 
   defp print(lock, changelogs) do
     for {package_name, %{changelog: changelog, latest_version: latest_version}} <- changelogs do
-      version = lock[String.to_atom(package_name)] |> elem(2)
+      version = lock_file_version(lock, package_name)
 
       if version != latest_version do
         IO.puts("""
@@ -50,6 +50,30 @@ defmodule Changelog.CLI do
         """)
       end
     end
+  end
+
+  defp lock_file_version(lock, package_name) do
+    lookup_name = String.to_atom(package_name)
+
+    package_info =
+      cond do
+        package_info = lock[lookup_name] ->
+          package_info
+
+        package_info = find_package_info_by_app_name(lock, lookup_name) ->
+          package_info
+
+        true ->
+          Mix.raise("Unable to find #{package_name}'s version in the mix.lock file")
+      end
+
+    elem(package_info, 2)
+  end
+
+  defp find_package_info_by_app_name(lock, app_name) do
+    Enum.find_value(lock, fn {_key, package} ->
+      if elem(package, 1) == app_name, do: package
+    end)
   end
 
   defp fetch_changelogs(packages) do
