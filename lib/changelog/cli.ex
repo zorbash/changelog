@@ -83,8 +83,9 @@ defmodule Changelog.CLI do
     for {_, package} <- packages, into: %{} do
       case :hex_api_package.get(hex_config, package) do
         {:ok,
-         {_status, _headers, %{"latest_version" => latest_version, "meta" => %{"links" => links}}}} ->
-          {package, %{latest_version: latest_version, changelog: fetch_changelog(links)}}
+         {_status, _headers,
+          %{"latest_stable_version" => latest_stable_version, "meta" => %{"links" => links}}}} ->
+          {package, %{latest_version: latest_stable_version, changelog: fetch_changelog(links)}}
 
         _ ->
           {package, %{}}
