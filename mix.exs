@@ -33,8 +33,8 @@ defmodule Changelog.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:hex_core, "~> 0.8"},
-      {:req, "~> 0.2"},
+      {:hex_core, "~> 0.8.0"},
+      {:req, "~> 0.2.0"},
       {:ex_doc, "~> 0.25", only: :dev, runtime: false}
     ]
   end
