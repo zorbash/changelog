@@ -34,7 +34,7 @@ defmodule Changelog.MixProject do
   defp deps do
     [
       {:hex_core, "~> 0.8.0"},
-      {:req, "~> 0.3.0"},
+      {:req, "~> 0.4.0"},
       {:ex_doc, "~> 0.25", only: :dev, runtime: false}
     ]
   end
