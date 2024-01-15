@@ -4,7 +4,7 @@ defmodule Changelog.MixProject do
   def project do
     [
       app: :changelog,
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.12",
       escript: [main_module: Changelog.CLI],
       start_permanent: Mix.env() == :prod,
@@ -33,8 +33,8 @@ defmodule Changelog.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:hex_core, "~> 0.8.0"},
-      {:req, "~> 0.3.0"},
+      {:hex_core, "~> 0.10.0"},
+      {:req, "~> 0.4.0"},
       {:ex_doc, "~> 0.25", only: :dev, runtime: false}
     ]
   end
