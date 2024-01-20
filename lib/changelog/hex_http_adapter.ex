@@ -12,6 +12,16 @@ defmodule Changelog.HexHTTPAdapter do
       Request.new(method: method, url: url, headers: Map.to_list(req_headers))
       |> Request.run_request()
 
-    {:ok, {resp.status, Map.new(resp.headers), resp.body}}
+    # 0.1.3 - 2024-01-15: updating parsing of returned headers to match the expected format
+    # by the :hex_core src/hex_api.erl module for :hex_api.request/4
+    # The expected format of the headers is a Map with %{k::binary(), v::binary()}
+    # The above run_request() was returning a header map of the format:
+    # %{k::binary(), v::list[binary()]}
+    resp_headers =
+      resp.headers
+      |> Map.new()
+      |> Enum.reduce(%{}, fn {k, v}, acc -> Map.put(acc, k, :erlang.list_to_binary(v)) end)
+
+    {:ok, {resp.status, resp_headers, resp.body}}
   end
 end
